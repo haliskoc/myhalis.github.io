@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Teknoloji, yazılım ve lise hayatı üzerine düşüncelerim. Modern bir karanlık tema ile tasarlanmış kişisel blog.">
+    <meta name="keywords" content="blog, teknoloji, yazılım, lise, öğrenci, kişisel blog">
+    <meta name="author" content="Halis Koç">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Halis Koç - Kişisel Blog">
+    <meta property="og:description" content="Yazılım, teknoloji ve kişisel deneyimler">
+    <meta property="og:image" content="images/og-image.jpg">
+    <meta property="og:url" content="https://haliskoc.github.io">
+    <meta property="og:type" content="website">
+    
+    <title>Ana Sayfa - Kişisel Blog</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/features.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed.xml">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="index.html" class="logo">
+                        <span class="logo-text">Halis Koç</span>
+                    </a>
+                    
+                    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                        <span class="hamburger"></span>
+                        <span class="hamburger"></span>
+                        <span class="hamburger"></span>
+                    </button>
+                    
+                    <ul class="nav-menu">
+                        <li><a href="index.html" class="nav-link active">Ana Sayfa</a></li>
+                        <li><a href="blog.html" class="nav-link">Blog</a></li>
+                        <li><a href="about.html" class="nav-link">Hakkımda</a></li>
+                        <li><a href="contact.html" class="nav-link">İletişim</a></li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/haliskoc" target="_blank" rel="noopener" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/halis-ko%C3%A7-422a1a347/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-image">
+                        <img src="images/avatar.jpg" alt="Profile Photo" class="avatar">
+                    </div>
+                    <h1 class="hero-title">Merhaba, Ben <span class="highlight">Halis Koç</span></h1>
+                    <p class="hero-subtitle">Yazılım geliştirici, teknoloji tutkunu ve sürekli öğrenen</p>
+                    <div class="hero-buttons">
+                        <a href="blog.html" class="btn btn-primary">Blog Yazılarım</a>
+                        <a href="about.html" class="btn btn-secondary">Hakkımda</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Blog Posts -->
+        <section class="latest-posts">
+            <div class="container">
+                <h2 class="section-title">Son Blog Yazıları</h2>
+                <div class="posts-grid" id="latest-posts-grid">
+                    <!-- Blog posts will be loaded here via JavaScript -->
+                </div>
+                <div class="section-footer">
+                    <a href="blog.html" class="btn btn-outline">Tüm Yazıları Gör</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Summary -->
+        <section class="about-summary">
+            <div class="container">
+                <h2 class="section-title">Hakkımda</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p class="dummy-content">
+                            Merhaba! Ben Halis Koç. Yazılım geliştirme, web teknolojileri ve modern programlama dilleri ile ilgileniyorum.
+                            Bu blogda teknoloji, yazılım ve kişisel deneyimlerimi paylaşıyorum.
+                        </p>
+                        <div class="skills-preview">
+                            <h3>İlgi Alanlarım</h3>
+                            <div class="skill-tags">
+                                <span class="tag">Web Geliştirme</span>
+                                <span class="tag">Python</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">Grafik Tasarım</span>
+                                <span class="tag">Fotoğrafçılık</span>
+                                <span class="tag">Müzik</span>
+                            </div>
+                        </div>
+                        <a href="about.html" class="btn btn-link">Daha fazla oku →</a>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-pen"></i>
+                            <span class="stat-number">15</span>
+                            <span class="stat-label">Blog Yazısı</span>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-code"></i>
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Proje</span>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-coffee"></i>
+                            <span class="stat-number">∞</span>
+                            <span class="stat-label">Kahve</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <!-- Newsletter Section -->
+            <div class="newsletter">
+                <h3>📬 Bültenime Abone Olun</h3>
+                <p>Yeni yazılarımdan ve projelerimden haberdar olmak için e-posta bültenime abone olun.</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" placeholder="E-posta adresiniz" required>
+                    <button type="submit">Abone Ol</button>
+                </form>
+            </div>
+            <div class="footer-content">
+                <div class="footer-section">
+                <h3>Halis Koç</h3>
+                    <p>Teknoloji ve yaşam üzerine düşüncelerim</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/haliskoc" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/halis-ko%C3%A7-422a1a347/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Hızlı Linkler</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">Hakkımda</a></li>
+                        <li><a href="contact.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>İletişim</h3>
+                    <p class="dummy-content"><i class="fas fa-envelope"></i> contact@haliskoc.com</p>
+                    <p class="dummy-content"><i class="fas fa-map-marker-alt"></i> Türkiye</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Halis Koç. Tüm hakları saklıdır.</p>
+                <p>Bu site <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a>'te barındırılmaktadır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Theme Toggle Removed - Only Dark Theme -->
+
+    <!-- Scripts -->
+    <script src="js/main.js" defer></script>
+    <script src="js/command-palette.js" defer></script>
+    <script src="js/animations.js" defer></script>
+    <script src="js/advanced-features.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js" defer></script>
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+        }
+    </script>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Halis Koç",
+        "url": "https://username.github.io",
+        "sameAs": [
+            "https://github.com/haliskoc",
+            "https://www.linkedin.com/in/halis-ko%C3%A7-422a1a347/"
+        ],
+        "jobTitle": "Öğrenci",
+        "description": "Teknoloji tutkunu ve yazılım öğrencisi"
+    }
+    </script>
+</body>
+</html>

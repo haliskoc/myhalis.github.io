@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog yazısı detay sayfası">
+    <meta name="keywords" content="blog, yazı, teknoloji">
+    <meta name="author" content="Halis Koç">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Blog Yazısı - Halis Koç">
+    <meta property="og:description" content="Blog yazısı içeriği">
+    <meta property="og:image" content="images/blog-cover.jpg">
+    <meta property="og:url" content="https://username.github.io/blog-post.html">
+    <meta property="og:type" content="article">
+    
+    <title>Blog Yazısı - Kişisel Blog</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <style>
+        /* Blog Post Specific Styles */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--text-link) 0%, var(--accent-primary) 100%);
+            z-index: 1001;
+            transition: width 0.2s ease;
+        }
+        
+        .blog-post-hero {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+            padding: var(--spacing-3xl) 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .blog-post-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-md);
+            color: var(--text-secondary);
+        }
+        
+        .blog-post-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--spacing-3xl) var(--spacing-lg);
+        }
+        
+        .blog-post-content h2 {
+            margin-top: var(--spacing-2xl);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .blog-post-content h3 {
+            margin-top: var(--spacing-xl);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .blog-post-content p {
+            line-height: 1.8;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .blog-post-content pre {
+            background-color: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            position: relative;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .blog-post-content code {
+            font-family: var(--font-code);
+            color: var(--text-link);
+        }
+        
+        .blog-post-content img {
+            max-width: 100%;
+            border-radius: var(--radius-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .blog-post-content blockquote {
+            border-left: 4px solid var(--accent-primary);
+            padding-left: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        
+        .blog-post-content ul,
+        .blog-post-content ol {
+            margin: var(--spacing-lg) 0;
+            padding-left: var(--spacing-xl);
+        }
+        
+        .blog-post-content li {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .copy-code-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 4px 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .copy-code-btn:hover {
+            background: var(--text-link);
+            color: var(--bg-primary);
+        }
+        
+        .post-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-xl);
+            border-top: 1px solid var(--border-color);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .nav-post {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+            max-width: 45%;
+        }
+        
+        .nav-post.prev {
+            align-items: flex-start;
+        }
+        
+        .nav-post.next {
+            align-items: flex-end;
+            text-align: right;
+        }
+        
+        .nav-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .nav-title {
+            color: var(--text-link);
+            font-weight: 500;
+            transition: color var(--transition-fast);
+        }
+        
+        .nav-title:hover {
+            color: var(--text-link-hover);
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-xl);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .share-btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            transition: all var(--transition-fast);
+        }
+        
+        .share-btn:hover {
+            background: var(--text-link);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+        }
+        
+        .toc {
+            position: sticky;
+            top: 100px;
+            background: var(--bg-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            max-width: 250px;
+            float: right;
+            margin-left: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            z-index: 10;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .toc h3 {
+            margin-bottom: var(--spacing-md);
+            font-size: 1rem;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .toc li {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .toc a {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            transition: color var(--transition-fast);
+        }
+        
+        .toc a:hover {
+            color: var(--text-link);
+        }
+        
+        @media (max-width: 1024px) {
+            .toc {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="reading-progress"></div>
+    
+    <!-- Loading Animation -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="index.html" class="logo">
+                        <span class="logo-text">Halis Koç</span>
+                    </a>
+                    
+                    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                        <span class="hamburger"></span>
+                        <span class="hamburger"></span>
+                        <span class="hamburger"></span>
+                    </button>
+                    
+                    <ul class="nav-menu">
+                        <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+                        <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                        <li><a href="about.html" class="nav-link">Hakkımda</a></li>
+                        <li><a href="contact.html" class="nav-link">İletişim</a></li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/haliskoc" target="_blank" rel="noopener" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/halis-ko%C3%A7-422a1a347/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Blog Post Hero -->
+        <section class="blog-post-hero">
+            <div class="container">
+                <h1 id="post-title">Web Geliştirmeye Başlarken: İlk Adımlar</h1>
+                <div class="blog-post-meta">
+                    <span><i class="fas fa-calendar"></i> <span id="post-date">15 Ocak 2024</span></span>
+                    <span><i class="fas fa-clock"></i> <span id="post-reading-time">5</span> dk okuma</span>
+                    <span><i class="fas fa-folder"></i> <span id="post-category">Yazılım</span></span>
+                    <span class="post-views"><i class="fas fa-eye"></i> <span id="view-count">142</span> görüntülenme</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Post Content -->
+        <article class="blog-post-content">
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h3>İçindekiler</h3>
+                <ul>
+                    <li><a href="#section1">1. Giriş</a></li>
+                    <li><a href="#section2">2. HTML Temelleri</a></li>
+                    <li><a href="#section3">3. CSS ile Stil Vermek</a></li>
+                    <li><a href="#section4">4. JavaScript'e Giriş</a></li>
+                    <li><a href="#section5">5. İlk Projeniz</a></li>
+                    <li><a href="#section6">6. Sonuç</a></li>
+                </ul>
+            </div>
+            
+            <h2 id="section1">1. Giriş</h2>
+            <p>
+                Web geliştirme yolculuğuma nasıl başladığımı ve ilk projelerimi nasıl oluşturduğumu sizlerle paylaşmak istiyorum. 
+                Bu yazıda, HTML, CSS ve JavaScript öğrenme sürecimden bahsedeceğim ve yeni başlayanlar için ipuçları vereceğim.
+            </p>
+            
+            <blockquote>
+                "Her uzman bir zamanlar acemiydi. Her profesyonel bir zamanlar amatördü. Her başarı hikayesi bir 'başlangıç' ile başlar."
+            </blockquote>
+            
+            <h2 id="section2">2. HTML Temelleri</h2>
+            <p>
+                HTML (HyperText Markup Language), web sayfalarının iskeletini oluşturan işaretleme dilidir. 
+                İlk öğrenmeniz gereken şey, HTML'in bir programlama dili olmadığı, sadece içeriği yapılandıran bir işaretleme dili olduğudur.
+            </p>
+            
+            <h3>Temel HTML Yapısı</h3>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="tr"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;İlk Web Sayfam&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Merhaba Dünya!&lt;/h1&gt;
+    &lt;p&gt;Bu benim ilk web sayfam.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            
+            <h2 id="section3">3. CSS ile Stil Vermek</h2>
+            <p>
+                CSS (Cascading Style Sheets), HTML elementlerinize stil vermenizi sağlar. 
+                Renkler, fontlar, spacing, layout ve daha fazlası CSS ile kontrol edilir.
+            </p>
+            
+            <h3>CSS Örneği</h3>
+            <pre><code>body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0d1117;
+    color: #f0f6fc;
+}
+
+h1 {
+    color: #58a6ff;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}</code></pre>
+            
+            <h2 id="section4">4. JavaScript'e Giriş</h2>
+            <p>
+                JavaScript, web sayfalarınıza interaktivite katmanızı sağlayan programlama dilidir. 
+                Dinamik içerik, kullanıcı etkileşimleri ve modern web uygulamaları JavaScript ile oluşturulur.
+            </p>
+            
+            <ul>
+                <li>Değişkenler ve veri tipleri</li>
+                <li>Fonksiyonlar ve scope</li>
+                <li>DOM manipülasyonu</li>
+                <li>Event handling</li>
+                <li>Asenkron programlama</li>
+            </ul>
+            
+            <h3>JavaScript Örneği</h3>
+            <pre><code>// Butona tıklandığında mesaj göster
+document.getElementById('myButton').addEventListener('click', function() {
+    alert('Merhaba, Web Geliştirme Dünyası!');
+    console.log('Button clicked');
+});</code></pre>
+            
+            <h2 id="section5">5. İlk Projeniz</h2>
+            <p>
+                İlk projeniz basit bir kişisel portfolio sitesi olabilir. İşte başlamanız için adımlar:
+            </p>
+            
+            <ol>
+                <li>Proje klasörünüzü oluşturun</li>
+                <li>index.html dosyanızı oluşturun</li>
+                <li>styles.css dosyanızı ekleyin</li>
+                <li>script.js ile interaktivite katın</li>
+                <li>GitHub Pages ile yayınlayın</li>
+            </ol>
+            
+            <h2 id="section6">6. Sonuç</h2>
+            <p>
+                Web geliştirme öğrenmek başta göz korkutucu görünebilir, ancak adım adım ilerleyerek 
+                ve sürekli pratik yaparak harika projeler oluşturabilirsiniz. Unutmayın, her gün 
+                yeni bir şey öğrenmek ve kodunuzu geliştirmek önemlidir.
+            </p>
+            
+            <p>
+                Umarım bu yazı, web geliştirme yolculuğunuza başlamanız için size ilham vermiştir. 
+                Sorularınız varsa, benimle iletişime geçmekten çekinmeyin!
+            </p>
+        </article>
+
+        <!-- Share Buttons -->
+        <div class="share-buttons">
+            <button class="share-btn" onclick="shareOnLinkedIn()">
+                <i class="fab fa-linkedin"></i> LinkedIn'de Paylaş
+            </button>
+            <button class="share-btn" onclick="copyLink()">
+                <i class="fas fa-link"></i> Linki Kopyala
+            </button>
+        </div>
+
+        <!-- Post Navigation -->
+        <nav class="post-navigation">
+            <div class="nav-post prev">
+                <span class="nav-label">← Önceki Yazı</span>
+                <a href="#" class="nav-title">Python ile Veri Analizi</a>
+            </div>
+            <div class="nav-post next">
+                <span class="nav-label">Sonraki Yazı →</span>
+                <a href="#" class="nav-title">Lise Hayatında Zaman Yönetimi</a>
+            </div>
+        </nav>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Halis Koç</h3>
+                    <p>Teknoloji ve yaşam üzerine düşüncelerim</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/haliskoc" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/halis-ko%C3%A7-422a1a347/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Hızlı Linkler</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">Hakkımda</a></li>
+                        <li><a href="contact.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>İletişim</h3>
+                    <p><i class="fas fa-envelope"></i> email@example.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Halis Koç. Tüm hakları saklıdır.</p>
+                <p>Bu site <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a>'te barındırılmaktadır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Theme Toggle Removed - Only Dark Theme -->
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Reading Progress
+        window.addEventListener('scroll', () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPosition = window.scrollY;
+            const progress = (scrollPosition / scrollHeight) * 100;
+            document.getElementById('reading-progress').style.width = progress + '%';
+        });
+        
+        // View Counter Simulation
+        window.addEventListener('load', () => {
+            let views = parseInt(localStorage.getItem('post-views') || '142');
+            views++;
+            localStorage.setItem('post-views', views);
+            document.getElementById('view-count').textContent = views;
+        });
+        
+        // Copy Code Functionality
+        document.querySelectorAll('pre code').forEach(block => {
+            const button = document.createElement('button');
+            button.className = 'copy-code-btn';
+            button.textContent = 'Kopyala';
+            
+            const pre = block.parentElement;
+            pre.style.position = 'relative';
+            pre.appendChild(button);
+            
+            button.addEventListener('click', () => {
+                navigator.clipboard.writeText(block.textContent).then(() => {
+                    button.textContent = 'Kopyalandı!';
+                    button.style.background = '#238636';
+                    button.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        button.textContent = 'Kopyala';
+                        button.style.background = '';
+                        button.style.color = '';
+                    }, 2000);
+                });
+            });
+        });
+        
+        // Share Functions
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+        }
+        
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Link kopyalandı!');
+            });
+        }
+        
+        // Hide loader when page is loaded
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
