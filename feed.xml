@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kişisel Blog - Lise Öğrencisi</title>
+    <description>Teknoloji, kodlama ve lise hayatı hakkında yazılar</description>
+    <link>https://example.com</link>
+    <atom:link href="https://example.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <language>tr-TR</language>
+    <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate>
+    
+    <item>
+      <title>Web Geliştirmeye Giriş</title>
+      <description>Web geliştirmenin temellerini öğrenirken edindiğim deneyimler ve tavsiyeler.</description>
+      <link>https://example.com/blog/web-gelistirmeye-giris</link>
+      <guid>https://example.com/blog/web-gelistirmeye-giris</guid>
+      <pubDate>Sun, 31 Dec 2023 12:00:00 +0000</pubDate>
+      <category>Web Development</category>
+    </item>
+    
+    <item>
+      <title>İlk Python Projem</title>
+      <description>Python ile geliştirdiğim ilk proje hakkında detaylar ve öğrendiklerim.</description>
+      <link>https://example.com/blog/ilk-python-projem</link>
+      <guid>https://example.com/blog/ilk-python-projem</guid>
+      <pubDate>Sat, 30 Dec 2023 12:00:00 +0000</pubDate>
+      <category>Python</category>
+    </item>
+    
+    <item>
+      <title>Yapay Zeka ve Gelecek</title>
+      <description>Yapay zekanın gelecekteki rolü ve öğrenciler için fırsatlar.</description>
+      <link>https://example.com/blog/yapay-zeka-ve-gelecek</link>
+      <guid>https://example.com/blog/yapay-zeka-ve-gelecek</guid>
+      <pubDate>Fri, 29 Dec 2023 12:00:00 +0000</pubDate>
+      <category>AI</category>
+    </item>
+    
+    <item>
+      <title>Lise Hayatında Kodlama</title>
+      <description>Lise hayatında kodlama öğrenmenin zorlukları ve avantajları.</description>
+      <link>https://example.com/blog/lise-hayatinda-kodlama</link>
+      <guid>https://example.com/blog/lise-hayatinda-kodlama</guid>
+      <pubDate>Thu, 28 Dec 2023 12:00:00 +0000</pubDate>
+      <category>Personal</category>
+    </item>
+    
+    <item>
+      <title>Git ve GitHub Kullanımı</title>
+      <description>Version control sistemleri ve GitHub'ın temel kullanımı.</description>
+      <link>https://example.com/blog/git-ve-github-kullanimi</link>
+      <guid>https://example.com/blog/git-ve-github-kullanimi</guid>
+      <pubDate>Wed, 27 Dec 2023 12:00:00 +0000</pubDate>
+      <category>Tools</category>
+    </item>
+  </channel>
+</rss>
